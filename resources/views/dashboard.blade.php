@@ -11,13 +11,13 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="{{ asset('assets/img/banner1.jpg') }}" alt="First slide">
+          <img class="d-block w-100" src="{{ asset('assets/img/gambar4.jpg') }}" alt="First slide">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="{{ asset('assets/img/banner2.jpg') }}" alt="Second slide">
+          <img class="d-block w-100" src="{{ asset('assets/img/gambar3.jpg') }}" alt="Second slide">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="{{ asset('assets/img/banner3.jpg') }}" alt="Third slide">
+          <img class="d-block w-100" src="{{ asset('assets/img/gambar1.jpg') }}" alt="Third slide">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -42,7 +42,7 @@
   <div class="col-xl-2"></div>
   <div class="col-xl-8">
     <center>
-      <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded-circle my-4">
+      <!-- <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded-circle my-4">s -->
       <p style="text-align: justify;">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et turpis sit amet tellus lacinia tincidunt quis ac dui. Nulla pulvinar convallis ex, nec fermentum nisi rhoncus sit amet. Praesent eu tellus sem. Integer sollicitudin, ligula ut luctus convallis, purus orci pulvinar dolor, sit amet venenatis nisl magna id augue. Proin venenatis porttitor nibh, eu semper sapien interdum et. Praesent et nibh in purus dictum maximus. Proin et tellus sed nulla pulvinar sollicitudin. Donec et purus ultricies, posuere ipsum ut, auctor magna.
 
@@ -62,15 +62,18 @@
 <div class="row mt-2">
   <div class="col-xl-12 mb-2">
     <center>
-      <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded m-3 img-galeri">
-      <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded m-3 img-galeri">
-      <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded m-3 img-galeri">
-      <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded m-3 img-galeri">
-      <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded m-3 img-galeri">
-      <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded m-3 img-galeri">
-      <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded m-3 img-galeri">
-      <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded m-3 img-galeri">
-      <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar2.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar5.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar6.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar7.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar8.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar9.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar10.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar11.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar12.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar13.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar14.jpg') }}" class="img-fluid rounded m-3 img-galeri">
+      <img src="{{ asset('assets/img/gambar15.jpg') }}" class="img-fluid rounded m-3 img-galeri">
     </center>
   </div>
 </div>
