@@ -2,6 +2,7 @@
   <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
       <div class="sb-sidenav-menu">
           <div class="nav">
+            @if (auth()->user() != null)
               <a class="nav-link mt-2" href="{{ route('dashboard') }}">
                   <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                   Home
@@ -36,17 +37,17 @@
                       <a class="nav-link" href="{{ route('rekapitulasi.index') }}">Rekapitulasi</a>
                   </nav>
               </div>
-              @endif
-              
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ route('cek_kualitas.index') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-check"></i></div>
                 Cek Kualitas
               </a>
+              @endif                  
+              @endif
           </div>
       </div>
       <div class="sb-sidenav-footer">
           <div class="small">Logged in as:</div>
-          {{ auth()->user()->name }}
+          {{ isset(auth()->user()->name) ? auth()->user()->name : '' }}
       </div>
   </nav>
 </div>

@@ -11,7 +11,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
         @stack('css')
     </head>
+    @if (auth()->user() != null)
     <body class="sb-nav-fixed">
+    @else
+    <body class="sb-nav-fixed sb-sidenav-toggled">
+    @endif
         <!-- Topbar -->
         @include('layouts.partials.topbar')
         <!-- End of Topbar -->

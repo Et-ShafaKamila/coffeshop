@@ -42,17 +42,36 @@ class PengeluaranController extends Controller
         $this->validate($request, [
             'nominal' => 'required',
             'keterangan' => 'required',
+            'bukti' => 'required'
         ], [
             'required' => ':attribute harus diisi.',
         ], [
             'nominal' => 'Nominal',
             'keterangan' => 'Keterangan',
+            'bukti' => 'Bukti',
         ]);
 
         $newPengeluaran = new Keuangan;
         $newPengeluaran->nominal = $request->nominal;
         $newPengeluaran->keterangan = $request->keterangan;
         $newPengeluaran->tipe = 'Pengeluaran';
+        if($request->file('bukti') != null) {
+            $folder = 'upload/bukti';
+            $file = $request->file('bukti');
+            $filename = date('YmdHis').$file->getClientOriginalName();
+            // Get canonicalized absolute pathname
+            $path = realpath($folder);
+
+            // If it exist, check if it's a directory
+            if(!($path !== true AND is_dir($path)))
+            {
+                // Path/folder does not exist then create a new folder
+                mkdir($folder, 0755, true);
+            }
+            if($file->move($folder, $filename)) {
+                $newPengeluaran->bukti = $folder.'/'.$filename;
+            }
+        }
         $newPengeluaran->save();
 
         return redirect('master/keuangan/pengeluaran')->withStatus('Berhasil menyimpan data.');
@@ -95,6 +114,23 @@ class PengeluaranController extends Controller
         $update = Keuangan::find($id);
         $update->nominal = $request->nominal;
         $update->keterangan = $request->keterangan;
+        if($request->file('bukti') != null) {
+            $folder = 'upload/bukti';
+            $file = $request->file('bukti');
+            $filename = date('YmdHis').$file->getClientOriginalName();
+            // Get canonicalized absolute pathname
+            $path = realpath($folder);
+
+            // If it exist, check if it's a directory
+            if(!($path !== true AND is_dir($path)))
+            {
+                // Path/folder does not exist then create a new folder
+                mkdir($folder, 0755, true);
+            }
+            if($file->move($folder, $filename)) {
+                $update->bukti = $folder.'/'.$filename;
+            }
+        }
         $update->save();
 
         return redirect('master/keuangan/pengeluaran')->withStatus('Berhasil menyimpan data.');

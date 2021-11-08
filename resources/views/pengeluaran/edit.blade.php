@@ -21,7 +21,7 @@
                       </div>
                       <!-- Card Body -->
                       <div class="card-body">
-                        <form action="{{ route('pengeluaran.update', $data->id) }}" method="post">
+                        <form action="{{ route('pengeluaran.update', $data->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
@@ -30,6 +30,19 @@
                                 @error('nominal')
                                     <div class="invalid-feedback">
                                       {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="bukti">Bukti</label>
+                                <br>
+                                @if ($data->bukti)
+                                  <img src="{{ asset($data->bukti) }}" width="200" height="200">
+                                @endif
+                                <input type="file" name="bukti" id="bukti" class="form-control @error('bukti') is-invalid @enderror" value="{{ old('bukti') }}">
+                                @error('bukti')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
                                     </div>
                                 @enderror
                             </div>

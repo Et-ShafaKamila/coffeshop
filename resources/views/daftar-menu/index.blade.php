@@ -39,7 +39,7 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center">
-                                                <img src="{{ asset($item->foto) }}" alt="$item->nama" class="rounded img-fluid" width="200px" height="200px">
+                                                <img src="{{ asset($item->foto) }}" alt="{{$item->nama}}" class="rounded img-fluid" width="200px" height="200px">
                                                 {{ $item->nama }}
                                             </td>
                                             <td class="text-center">{{ isset($item->keterangan) ? $item->keterangan : '-' }}</td>

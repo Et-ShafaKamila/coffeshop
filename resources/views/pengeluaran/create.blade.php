@@ -21,12 +21,21 @@
                       </div>
                       <!-- Card Body -->
                       <div class="card-body">
-                        <form action="{{ route('pengeluaran.store') }}" method="post">
+                        <form action="{{ route('pengeluaran.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="nominal">Nominal</label>
                                 <input type="number" name="nominal" id="nominal" class="form-control @error('nominal') is-invalid @enderror" value="{{ old('nominal') }}" required>
                                 @error('nominal')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="bukti">Bukti</label>
+                                <input type="file" name="bukti" id="bukti" class="form-control @error('bukti') is-invalid @enderror" value="{{ old('bukti') }}">
+                                @error('bukti')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

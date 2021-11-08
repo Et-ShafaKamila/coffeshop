@@ -24,89 +24,75 @@
             <form action="{{ route('pemesanan.update', $pesanan->id) }}" method="post">
                 @csrf
                 @method('PUT')
-                {{--  <div class="row mb-4">
-                    <div class="col-xl-6">
-                        <div class="row">
-                            @forelse ($daftarMenu as $item)
-                            <div class="card mr-2 mb-2" style="width: 12rem;">
-                                <img class="card-img-top" src="{{ asset($item->foto) }}" alt="Card image cap">
-                                <div class="card-body">
-                                    {{ ucwords($item->nama) }} <br>
-                                    Rp. {{ number_format($item->harga, 2, ',', '.') }}
-                                </div>
-                                <button type="button" name="add_cart" class="btn btn-primary add_cart" data-productname="{{ $item->nama }}" data-productprice="{{ $item->harga }}" data-productid="{{ $item->id }}" />Pilih</button>
-                            </div>
-                            @empty
-                                <p>Belum ada menu yang tersedia.</p>
-                            @endforelse
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="table-cart">
-                                <tr>
-                                    <th class="text-center">Menu</th>
-                                    <th class="text-center">Harga</th>
-                                    <th class="text-center">Qty</th>
-                                    <th class="text-center">Total</th>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <hr>  --}}
                 <div class="row">
                     <div class="col-xl-12 col-lg-11">
                       {{--  {{ $detail[0]->total_harga }}  --}}
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="table-cart">
-                                <tr>
-                                    <th class="text-center">Menu</th>
-                                    <th class="text-center">Qty</th>
-                                    <th class="text-center">Total</th>
-                                </tr>
+                            <table id="menu" class="table table-bordered" id="table-cart">
+                                <thead>
+                                    <tr>
+                                        <th>Menu</th>
+                                        <th>QTY</th>
+                                        <th>Harga</th>
+                                        <th align="center"><span id="amount" class="amount">Subtotal</span> </th>
+                                    </tr>
+                                </thead>
                                 @php
                                   $index = 0;
+                                  $initTotal = 0;
+                                  $isFirstLoad = true;
                                 @endphp
                                 @forelse ($daftarMenu as $item)
-                                <tr>
-                                  <td class="text-center">
-                                    <img class="img-fluid rounded" src="{{ asset($item->foto) }}" alt="Card image cap" width="160px" style="min-height: 140px;">
-                                    <br>
-                                    <input type="hidden" name="menu[]" value="{{ $item->id }}">
-                                    {{ $item->nama }}
-                                    <br>
-                                    <input type="hidden" name="price[]" value="{{ $item->harga }}">
-                                    Rp. <label id="price{{ $loop->iteration }}">{{ number_format($item->harga, 2, ',', '.') }}</label>
-                                  </td>
-                                  <td class="text-center">
-                                    @if ($item->id == $detail[$index]->id_menu)
-                                    <input type="number" name="qty[]" id="qty{{ $loop->iteration }}" value="{{ $item->id == $detail[$index]->id_menu ? $detail[$index]->qty : '0' }}" onchange="hitung({{ $loop->iteration }})" min="0" style="width: 5em;">
-                                    @else
-                                    <input type="number" name="qty[]" id="qty{{ $loop->iteration }}" value="0" onchange="hitung({{ $loop->iteration }})" min="0" style="width: 5em;">
-                                    @endif
-                                  </td>
-                                  <td class="text-center">
-                                    <input type="hidden" name="total[]" id="total_val{{ $loop->iteration }}" value="">
-                                    @if ($item->id == $detail[$index]->id_menu)
-                                    Rp. <label id="total{{ $loop->iteration }}">{{ number_format($detail[$index]->total_harga, 2, ',', '.') }}</label>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img class="img-fluid rounded" src="{{ asset($item->foto) }}" alt="Card image cap" width="160px" style="min-height: 140px;"><br>
+                                            <input type="hidden" name="menu[]" value="{{ $item->id }}">
+                                            <strong>
+                                                {{ $item->nama }}
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            @if ($item->id == $detail[$index]->id_menu)
+                                            @php
+                                                $initTotal += $detail[$index]->total_harga;
+                                                // echo $item->id.'-'.$detail[$index]->id_menu;
+                                            @endphp
+                                            <input type="text" value="{{ $detail[$index]->qty }}" name="qty[]" class="qty form-control" >
+                                            @else
+                                            <input type="text" value="" name="qty[]" class="qty form-control" >
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="price[]" value="{{ $item->harga }}">
+                                            <input type="text" value="{{ $item->harga }}" name="prices[]" class="price form-control" disabled="true">
+                                        </td>
+                                        <td align="center">
+                                            <strong id="amount" class="amount">Rp. 0</strong>
+                                        </td>
+                                    </tr>
                                     @php
-                                    if($loop->iteration < count($detail)) {
-                                        $index++;
-                                    }
+                                        if ($item->id == $detail[$index]->id_menu)
+                                            $index++;
+                                        //if($loop->iteration < count($detail)) {
+                                        //    if ($item->id == $detail[$index]->id_menu)
+                                        //        $index++;
+                                        //}
+                                        //else {
+                                        //    if ($item->id == $detail[$index]->id_menu)
+                                        //        $index++;
+                                        //}
                                     @endphp
-                                    @else
-                                    Rp. <label id="total{{ $loop->iteration }}">0,00</label>
-                                    @endif
-                                  </td>
-                                </tr>
-                                @empty
-                                <p>Belum ada menu yang tersedia.</p>
-                                @endforelse
-                            <tr>
-                                <th class="text-center" colspan="2">Total</th>
-                                <th class="text-center">Rp. <label id="subtotal"></label></th>
-                            </tr>
+                                    @empty
+                                    <p>Belum ada menu yang tersedia.</p>
+                                    @endforelse
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="text-center" colspan="3">Total</th>
+                                        <th class="text-center">Rp. <label id="total" class="total"> 0</label></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -177,20 +163,6 @@
 
 @push('js')
 <script>
-    var subtotal = 0;
-    function hitung(id) {
-        var qtyId = "qty"+id;
-        console.log(qtyId);
-        var number = resetNumberFormat($('#price'+id).text());
-        subtotal += parseInt(number);
-        $('#total_val'+id).val(number);
-        number = number_format(($('#'+qtyId+'').val() * number), 2, ',', '.');
-        $('#total'+id).text(number);
-
-        var subtotals = number_format(subtotal, 2, ',', '.');
-        $('#subtotal').text(subtotals);
-    }
-
     function resetNumberFormat(number) {
         number = number.split(',');
         {{--  number = number[0].replace('.', '');  --}}
@@ -213,25 +185,53 @@
 
         return x1 + x2;
     }
-
-    $(document).ready(function() {
-        var index = 1;
-        $('.add_cart').click(function() {
-            var product_id = $(this).data("productid");
-            var product_name = $(this).data("productname");
-            var product_price = number_format($(this).data("productprice"), 2, ',', '.');
-            
-            console.log('id: ' + product_id);
-            console.log('name: ' + product_name);
-            console.log('price: ' + product_price);
-
-            $('#table-cart tr:last').after('<tr><td class="text-center">'+product_name+'</td><td class="text-center">Rp.<label id="price">'+product_price+'</label></td><td class="text-center"><input type="number" id="qty'+index+'" class="qty" class="form-control" style="width: 5em" onchange="hitung()" min="0"></td><td class="text-center">Rp. <label id="total"></label></td></tr>');
-
-            index++;
+</script>
+<script>
+    var isFirstLoad = true;
+    $(document).ready(function(){
+        total();
+        $('.qty').change(function() {
+            total();
+            console.log('qty change');
         });
-        {{--  $("#qty").keyup(function() {
-            alert("The text has been changed.");
-        });  --}}
+        $('.amount').change(function() {
+            total();
+            console.log('amount change');
+        });
     });
+
+    function total()
+    {
+        console.log(isFirstLoad);
+        var sum = 0;
+        var init_total = {{ $initTotal }};
+        // if(init_total != null) {
+        //     sum = init_total;
+        //     console.log('init total = '+init_total);
+        //     $('.total').text(init_total);
+        // }
+        $('#menu > tbody  > tr').each(function() {
+            console.log('each');
+            var qty = $(this).find('.qty').val();
+            var price = $(this).find('.price').val();
+            var amount = (qty*price)
+            var	number_string = amount.toString(),
+            sisa 	= number_string.length % 3,
+            rupiah 	= number_string.substr(0, sisa),
+            ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
+            
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+            sum+=amount;
+            var totalBiaya = sum;
+
+            // console.log(totalBiaya);
+            $(this).find('.amount').text(''+rupiah);
+        });
+        sum = number_format(sum, 2, ',', '.');
+        $('.total').text(sum);
+    }
 </script>
 @endpush

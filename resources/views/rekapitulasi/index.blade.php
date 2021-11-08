@@ -106,6 +106,10 @@
                                           <th class="text-center">Rp. {{ number_format($totalPemasukan, 2, ',', '.') }}</th>
                                           <th class="text-center">Rp. {{ number_format($totalPengeluaran, 2, ',', '.') }}</th>
                                         </tr>
+                                        <tr>
+                                          <th class="text-center" colspan="3">Laba rugi</th>
+                                          <th class="text-center" colspan="2">Rp. {{ number_format($totalPemasukan-$totalPengeluaran, 2, ',', '.') }}</th>
+                                        </tr>
                                     </tfoot>
                                 </table>
                             </div>

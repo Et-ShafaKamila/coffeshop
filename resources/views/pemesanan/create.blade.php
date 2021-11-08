@@ -59,8 +59,12 @@
                         <div class="table-responsive">
                             <table id="menu" class="table table-bordered" id="table-cart">
                                 <thead>
-                                    <tr><th>Menu</th><th>QTY</th><th>Harga</th>
-                                    <th align="center"><span id="amount" class="amount">Subtotal</span> </th></tr>
+                                    <tr>
+                                        <th>Menu</th>
+                                        <th>QTY</th>
+                                        <th>Harga</th>
+                                        <th align="center"><span id="amount" class="amount">Subtotal</span> </th>
+                                    </tr>
                                 </thead>
                                 <tfoot>
                                     {{-- <tr><td colspan="2"></td> --}}
@@ -182,23 +186,6 @@
 
 @push('js')
 <script>
-    // var subtotal = 0;
-    // function hitung(id) {
-    //     var qtyId = "qty"+id;
-    //     console.log(qtyId);
-    //     var number = resetNumberFormat($('#price'+id).text());
-    //     $('#total_val'+id).val(number);
-    //     number = number_format(($('#'+qtyId+'').val() * number), 2, ',', '.');
-    //     console.log(number);
-    //     subtotal += parseInt(number);
-    //     $('#total'+id).text(number);
-
-    //     var subtotals = number_format(subtotal, 2, ',', '.');
-    //     // console.log(subtotals);
-
-    //     $('#subtotal').text(subtotals);
-    // }
-
     function resetNumberFormat(number) {
         number = number.split(',');
         {{--  number = number[0].replace('.', '');  --}}
@@ -221,26 +208,6 @@
 
         return x1 + x2;
     }
-
-    $(document).ready(function() {
-        var index = 1;
-        $('.add_cart').click(function() {
-            var product_id = $(this).data("productid");
-            var product_name = $(this).data("productname");
-            var product_price = number_format($(this).data("productprice"), 2, ',', '.');
-
-            // console.log('id: ' + product_id);
-            // console.log('name: ' + product_name);
-            // console.log('price: ' + product_price);
-
-            $('#table-cart tr:last').after('<tr><td class="text-center">'+product_name+'</td><td class="text-center">Rp.<label id="price">'+product_price+'</label></td><td class="text-center"><input type="number" id="qty'+index+'" class="qty" class="form-control" style="width: 5em" onchange="hitung()" min="0"></td><td class="text-center">Rp. <label id="total"></label></td></tr>');
-
-            index++;
-        });
-        {{--  $("#qty").keyup(function() {
-            alert("The text has been changed.");
-        });  --}}
-    });
 </script>
 <script>
     $(document).ready(function(){

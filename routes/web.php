@@ -6,6 +6,7 @@ use App\Http\Controllers\Master\PesananController;
 use App\Http\Controllers\Master\PengeluaranController;
 use App\Http\Controllers\Master\RekapitulasiController;
 use App\Http\Controllers\Master\UserController;
+use App\Http\Controllers\Master\CekKualitasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,8 +31,12 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::resource('daftar-menu', DaftarMenuController::class);
         Route::resource('pemesanan', PesananController::class);
-        Route::get('pemesanan/konfirmas-pembayaran/{id}', [PesananController::class, 'konfirmasiPembayaran'])
+        Route::get('pemesanan/konfirmasi-pembayaran/{id}', [PesananController::class, 'konfirmasiPembayaran'])
             ->name('pemesanan.konfirmasi');
+        Route::get('pemesanan/cancel/{id}', [PesananController::class, 'cancelOrder'])
+            ->name('pemesanan.cancel');
+        Route::get('pemesanan/print/{id}', [PesananController::class, 'print'])
+                ->name('pemesanan.print');
 
         Route::prefix('keuangan')->group(function() {
             Route::get('pemasukan', [PemasukanController::class, 'index'])->name('pemasukan.index');
@@ -41,6 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('lupa-password', [UserController::class, 'index'])->name('lupa-password.index');
         Route::put('lupa-password', [UserController::class, 'changePassword'])->name('lupa-password.change');
+
+        Route::get('cek_kualitas', [CekKualitasController::class, 'index'])->name('cek_kualitas.index');
 
         
     });

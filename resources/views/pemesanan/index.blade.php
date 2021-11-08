@@ -48,31 +48,56 @@
                                 {{--  <td class="text-center">{{ $item->nama_pemesan }}</td>  --}}
                                 <td class="text-center">{{ $item->nomor_meja }}</td>
                                 <td class="text-center">{{ isset($item->keterangan) ? $item->keterangan : '-' }}</td>
-                                <td class="text-center">{{ $item->created_at }}</td>
+                                <td class="text-center">
+                                    @if (!isset($item->cancelled_at))
+                                    {{ $item->created_at }}
+                                    @else
+                                    {{ $item->cancelled_at }}
+                                    @endif
+                                </td>
                                 <td class="text-right">{{ number_format($item->total, 2, ',', '.') }}</td>
-                                <td class="text-center">{{ $item->status }}</td>
+                                <td class="text-center">
+                                    @if (!isset($item->cancelled_at))
+                                    {{ $item->status }}
+                                    @else
+                                    Pesanan dibatalkan
+                                    @endif
+                                </td>
                                 <td class="align-middle">
                                     <center>
-                                        @if ($item->status == 'Belum Diproses' && auth()->user()->role == 'Pegawai')
+                                        @if ($item->status == 'Belum Diproses' && !isset($item->cancelled_at) && auth()->user()->role == 'Pegawai')
                                         <form action="{{route('pemesanan.konfirmasi', $item->id)}}" method="get" class="d-inline">
                                             @csrf
                                             <button type="submit" class="btn btn-sm btn-primary btn-circle" onclick="return confirm('Konfirmasi Pemesanan ?')">
                                                 <i class="fas fa-dollar-sign"></i>
                                             </button>
-                                        </form>|
+                                        </form>
                                         @endif
                                         <a href="{{route('pemesanan.show', $item->id)}}">
                                             <button type="submit" class="btn btn-sm btn-success btn-circle">
                                                 <i class="fas fa-eye"></i>
                                             </button>
                                         </a>
-                                        {{--  @if ($item->status == 'Belum Diproses' && auth()->user()->role == 'Customer')
+                                        @if ($item->status == 'Belum Diproses' && auth()->user()->role == 'Customer' && !isset($item->cancelled_at))
                                         <a href="{{route('pemesanan.edit', $item->id)}}">
                                             <button type="submit" class="btn btn-sm btn-info btn-circle">
                                                 <i class="fas fa-pen"></i>
                                             </button>
-                                        </a>|
-                                        @endif  --}}
+                                        </a>
+                                        <form action="{{route('pemesanan.cancel', $item->id)}}" method="get" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-danger btn-circle" onclick="return confirm('Batalkan pesanan ?')">
+                                                <i class="fas fa-window-close"></i>
+                                            </button>
+                                        </form>
+                                        @endif
+                                        @if ($item->status == 'Sudah Diproses' && !isset($item->cancelled_at) && auth()->user()->role == 'Pegawai')
+                                        <form action="{{route('pemesanan.print', $item->id)}}" method="get" target="_blank" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-primary btn-circle" onclick="return confirm('Print Nota ?')">
+                                                <i class="fas fa-print"></i>
+                                            </button>
+                                        </form>
+                                        @endif
                                         {{--  <form action="{{route('pemesanan.destroy', $item->id)}}" method="POST" class="d-inline">
                                             @method('delete')
                                             @csrf

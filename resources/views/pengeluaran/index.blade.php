@@ -33,6 +33,7 @@
                                           <th class="text-center">#</th>
                                           <th class="text-center">Tanggal</th>
                                           <th class="text-center">Keterangan</th>
+                                          <th class="text-center">Bukti</th>
                                           <th class="text-center">Nominal</th>
                                           <th class="text-center">Aksi</th>
                                         </tr>
@@ -43,6 +44,9 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center">{{ substr($item->created_at, 0, 10) }}</td>
                                             <td class="text-center">{{ $item->keterangan }}</td>
+                                            <td class="text-center">
+                                                <img src="{{ asset($item->bukti) }}" width="200" height="200">
+                                            </td>
                                             <td class="text-center">Rp. {{ number_format($item->nominal, 2, ',', '.') }}</td>
                                             <td class="align-middle">
                                                 <center>
@@ -61,8 +65,9 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                          <th class="text-center" colspan="3">Total</th>
-                                          <th class="text-center" colspan="2">Rp. {{ number_format($total, 2, ',', '.') }}</th>
+                                          <th class="text-center" colspan="4">Total</th>
+                                          <th class="text-center">Rp. {{ number_format($total, 2, ',', '.') }}</th>
+                                          <th></th>
                                         </tr>
                                     </tfoot>
                                 </table>

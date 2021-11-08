@@ -86,6 +86,12 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'meja' => 'unique:pesanan,nomor_meja',
+        ], [
+            'unique' => 'Meja telah digunakan.'
+        ]);
+
         $arrSelectedIndex = [];
         $arrSelectedItemId = [];
         $arrSelectedPrice = [];
@@ -195,9 +201,11 @@ class PesananController extends Controller
 
         $this->params['pesanan'] = $pesanan;
         
-        $this->params['detail'] = DetailPesanan::where('kode_pesanan', $pesanan->kode_pesanan)->orderBy('id_menu')->get();
-        // return $this->params['detail'];
-
+        $this->params['detail'] = DetailPesanan::select('detail_pesanan.*', 'daftar_menu.nama')
+                                                ->join('daftar_menu', 'daftar_menu.id', 'detail_pesanan.id_menu')
+                                                ->where('detail_pesanan.kode_pesanan', $pesanan->kode_pesanan)
+                                                ->orderBy('daftar_menu.nama')->get();
+        
         $this->params['daftarMenu'] = DaftarMenu::orderBy('nama')->get();
 
         $this->params['customer'] = User::where('role', 'Customer')
@@ -258,6 +266,7 @@ class PesananController extends Controller
         $arrBarang = [];
         for ($i=0; $i < count($arrSelectedItemId); $i++) {
             if($i < count($currentDetail)) {
+                // jumlah menu yg dipesan sama
                 if($arrSelectedItemId[$i] == $currentDetail[$indexBaru]->id_menu) {
                     array_push($arrBarang, $arrSelectedItemId[$i].'-update');
                     // Memperbarui data pesanan sebelumnya.
@@ -283,17 +292,35 @@ class PesananController extends Controller
                 }
             }
             else {
-                if($arrSelectedItemId[$i] == $currentDetail[$indexBaru]->id_menu) {
-                    array_push($arrBarang, $currentDetail[$indexBaru]->id_menu.'-update');
-                    // Memperbarui data pesanan sebelumnya.
-                    DB::table('detail_pesanan')
-                    ->where('kode_pesanan', $request->kode_pesanan)
-                    ->where('id_menu', $currentDetail[$indexBaru]->id_menu)
-                    ->update([
-                        'qty' => $arrQty[$arrSelectedIndex[$i]],
-                        'total_harga' => $arrQty[$arrSelectedIndex[$i]] * $arrPrice[$arrSelectedIndex[$i]],
-                    ]);
+                // jumlah menu yang dipesan berubah
+                // return $currentDetail;
+                if (array_key_exists($indexBaru,$currentDetail)) {
+                    // jika menu pesanan tetap
+                    return 'data lama '.$indexBaru;
                 }
+                else {
+                    // jika ada menu pesanan baru
+                    array_push($arrBarang, $arrSelectedItemId[$i].'-baru');
+                    // Menambah data pesanan baru.
+                    $newDetailPesanan = new DetailPesanan;
+                    $newDetailPesanan->kode_pesanan = $request->kode_pesanan;
+                    $newDetailPesanan->id_menu = $arrItemId[$arrSelectedIndex[$i]];
+                    $newDetailPesanan->qty = $arrQty[$arrSelectedIndex[$i]];
+                    $newDetailPesanan->total_harga = $arrPrice[$arrSelectedIndex[$i]] * $arrQty[$arrSelectedIndex[$i]];
+
+                    $newDetailPesanan->save();
+                }
+                // if($arrSelectedItemId[$i] == $currentDetail[$indexBaru]->id_menu) {
+                //     array_push($arrBarang, $currentDetail[$indexBaru]->id_menu.'-update');
+                //     // Memperbarui data pesanan sebelumnya.
+                //     DB::table('detail_pesanan')
+                //     ->where('kode_pesanan', $request->kode_pesanan)
+                //     ->where('id_menu', $currentDetail[$indexBaru]->id_menu)
+                //     ->update([
+                //         'qty' => $arrQty[$arrSelectedIndex[$i]],
+                //         'total_harga' => $arrQty[$arrSelectedIndex[$i]] * $arrPrice[$arrSelectedIndex[$i]],
+                //     ]);
+                // }
             }
         }
         /* End */
@@ -332,5 +359,28 @@ class PesananController extends Controller
 
         return back()->withError('Gagal mengkonfirmasi pembayaran.');
         
+    }
+
+    public function cancelOrder($id)
+    {
+        $update = Pesanan::find($id);
+        $update->cancelled_at = date('Y-m-d H:i:s');
+        $update->save();
+
+        return back()->withStatus('Berhasil membatalkan pemesanan.');        
+    }
+
+    public function print($id)
+    {
+        $pesanan = Pesanan::find($id);
+
+        $this->params['pesanan'] = $pesanan;
+        
+        $this->params['detail'] = DetailPesanan::select('detail_pesanan.*', 'daftar_menu.nama', 'daftar_menu.harga')
+                                                ->join('daftar_menu', 'daftar_menu.id', 'detail_pesanan.id_menu')
+                                                ->where('detail_pesanan.kode_pesanan', $pesanan->kode_pesanan)
+                                                ->orderBy('daftar_menu.nama')->get();
+                                                
+        return view('pemesanan.print', $this->params);
     }
 }
