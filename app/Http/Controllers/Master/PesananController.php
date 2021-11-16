@@ -49,6 +49,7 @@ class PesananController extends Controller
      */
     public function create()
     {
+
         /* Generate Kode Pesanan */
         $currentDate = date('Ymd');
         $kodePesanan = null;
@@ -66,7 +67,7 @@ class PesananController extends Controller
         else{
             $kodePesanan = $currentDate."0001";
         }
-        
+
         $this->params['kodePesanan'] = $kodePesanan;
         /* End Generate Kode Pesanan */
         $this->params['daftarMenu'] = DaftarMenu::orderBy('nama')->get();
@@ -86,33 +87,38 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $this->validate($request, [
-            'meja' => 'unique:pesanan,nomor_meja',
+            'meja' => 'unique:pesanan,nomor_meja|required',
+            'qty' => 'required',
         ], [
-            'unique' => 'Meja telah digunakan.'
+            'unique' => 'Meja telah digunakan.',
+            'not_in' => 'Silahkan pesan minal 1',
+            'required' => 'Data harus terisi'
         ]);
-
         $arrSelectedIndex = [];
         $arrSelectedItemId = [];
         $arrSelectedPrice = [];
         $arrItemId = $request->menu;
         $arrQty = $request->qty;
+        $count = array_sum($arrQty);
         $arrPrice = $request->price;
         $subTotal = 0;
         $custId = 0;
+       if ($count > 0) {
 
-        for ($i=0; $i < count($arrQty); $i++) { 
+        for ($i=0; $i < count($arrQty); $i++) {
             if($arrQty[$i] != null && $arrQty[$i] != 0) {
                 array_push($arrSelectedIndex, $i);
             }
         }
 
-        for ($i=0; $i < count($arrSelectedIndex); $i++) { 
+        for ($i=0; $i < count($arrSelectedIndex); $i++) {
             array_push($arrSelectedItemId, $arrItemId[$arrSelectedIndex[$i]]);
             array_push($arrSelectedPrice, $arrPrice[$arrSelectedIndex[$i]]);
             $subTotal += $arrPrice[$arrSelectedIndex[$i]] * $arrQty[$arrSelectedIndex[$i]];
         }
-        
+
         /* Adding data to pesanan table */
         if(auth()->user()->role == 'Pegawai') {
             if($request->old_cust == 0 && $request->new_cust != "") {
@@ -123,9 +129,9 @@ class PesananController extends Controller
                 $newUser->email_verified_at = date('Y-m-d H:i:s');
                 $newUser->role = 'Customer';
                 $newUser->password = \Hash::make('123456');
-    
+
                 $newUser->save();
-    
+
                 $custId = $newUser->id;
             }
             else {
@@ -149,7 +155,7 @@ class PesananController extends Controller
         /* End */
 
         /* Adding selected product to detail_pesanan table */
-        for ($i=0; $i < count($arrSelectedIndex); $i++) { 
+        for ($i=0; $i < count($arrSelectedIndex); $i++) {
             $newDetailPesanan = new DetailPesanan;
             $newDetailPesanan->kode_pesanan = $request->kode_pesanan;
             $newDetailPesanan->id_menu = $arrItemId[$arrSelectedIndex[$i]];
@@ -158,9 +164,14 @@ class PesananController extends Controller
 
             $newDetailPesanan->save();
         }
+        return redirect('/master/pemesanan')->withStatus('Berhasil melakukan pemesanan.');
+
+       }else{
+        return redirect()->back()->withError('Minimal pesanan 1 menu yang dipilih');
+       }
+
         /* End */
 
-        return redirect('/master/pemesanan')->withStatus('Berhasil melakukan pemesanan.');
     }
 
     /**
@@ -200,12 +211,12 @@ class PesananController extends Controller
         $pesanan = Pesanan::find($id);
 
         $this->params['pesanan'] = $pesanan;
-        
+
         $this->params['detail'] = DetailPesanan::select('detail_pesanan.*', 'daftar_menu.nama')
                                                 ->join('daftar_menu', 'daftar_menu.id', 'detail_pesanan.id_menu')
                                                 ->where('detail_pesanan.kode_pesanan', $pesanan->kode_pesanan)
                                                 ->orderBy('daftar_menu.nama')->get();
-        
+
         $this->params['daftarMenu'] = DaftarMenu::orderBy('nama')->get();
 
         $this->params['customer'] = User::where('role', 'Customer')
@@ -233,13 +244,13 @@ class PesananController extends Controller
         $subTotal = 0;
         $custId = 0;
 
-        for ($i=0; $i < count($arrQty); $i++) { 
+        for ($i=0; $i < count($arrQty); $i++) {
             if($arrQty[$i] != null && $arrQty[$i] != 0) {
                 array_push($arrSelectedIndex, $i);
             }
         }
 
-        for ($i=0; $i < count($arrSelectedIndex); $i++) { 
+        for ($i=0; $i < count($arrSelectedIndex); $i++) {
             array_push($arrSelectedItemId, $arrItemId[$arrSelectedIndex[$i]]);
             array_push($arrSelectedPrice, $arrPrice[$arrSelectedIndex[$i]]);
             $subTotal += $arrPrice[$arrSelectedIndex[$i]] * $arrQty[$arrSelectedIndex[$i]];
@@ -287,7 +298,7 @@ class PesananController extends Controller
                     $newDetailPesanan->id_menu = $arrItemId[$arrSelectedIndex[$i]];
                     $newDetailPesanan->qty = $arrQty[$arrSelectedIndex[$i]];
                     $newDetailPesanan->total_harga = $arrPrice[$arrSelectedIndex[$i]] * $arrQty[$arrSelectedIndex[$i]];
-        
+
                     $newDetailPesanan->save();
                 }
             }
@@ -337,10 +348,10 @@ class PesananController extends Controller
     public function destroy($id)
     {
         Pesanan::findOrFail($id)->delete();
-        
+
         return back()->withStatus('Berhasil menghapus data.');
     }
-    
+
     public function konfirmasiPembayaran($id)
     {
         $update = Pesanan::find($id);
@@ -358,7 +369,7 @@ class PesananController extends Controller
         }
 
         return back()->withError('Gagal mengkonfirmasi pembayaran.');
-        
+
     }
 
     public function cancelOrder($id)
@@ -367,7 +378,7 @@ class PesananController extends Controller
         $update->cancelled_at = date('Y-m-d H:i:s');
         $update->save();
 
-        return back()->withStatus('Berhasil membatalkan pemesanan.');        
+        return back()->withStatus('Berhasil membatalkan pemesanan.');
     }
 
     public function print($id)
@@ -375,12 +386,12 @@ class PesananController extends Controller
         $pesanan = Pesanan::find($id);
 
         $this->params['pesanan'] = $pesanan;
-        
+
         $this->params['detail'] = DetailPesanan::select('detail_pesanan.*', 'daftar_menu.nama', 'daftar_menu.harga')
                                                 ->join('daftar_menu', 'daftar_menu.id', 'detail_pesanan.id_menu')
                                                 ->where('detail_pesanan.kode_pesanan', $pesanan->kode_pesanan)
                                                 ->orderBy('daftar_menu.nama')->get();
-                                                
+
         return view('pemesanan.print', $this->params);
     }
 }

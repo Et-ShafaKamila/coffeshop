@@ -37,7 +37,7 @@
                       <a class="nav-link" href="{{ route('rekapitulasi.index') }}">Rekapitulasi</a>
                   </nav>
               </div>
-              <a class="nav-link" href="{{ route('cek_kualitas.index') }}">
+              <a class="nav-link {{ Request::segment(2) == 'cek-kualitas' ? 'active' : '' }}" href="{{ route('cek-kualitas.index') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-check"></i></div>
                 Cek Kualitas
               </a>

@@ -89,6 +89,9 @@
                                         </td>
                                         <td>
                                             <input type="text" value="" name="qty[]" class="qty form-control" >
+                                            @error('qty')
+                                                <p>{{ $message }}</p>
+                                            @enderror
                                         </td>
                                         <td>
                                             <input type="hidden" name="price[]" value="{{ $item->harga }}">
@@ -156,7 +159,7 @@
                         </div>
                         @endif  --}}
                         <div class="form-group">
-                            <label for="meja">Nomor Meja</label>
+                            <label for="meja">Nomor Meja <small class="text-danger">*</small> </label>
                             <input type="number" name="meja" id="meja" class="form-control @error('meja') is-invalid @enderror" value="{{ old('meja') }}">
                             @error('meja')
                                 <div class="invalid-feedback">
@@ -165,7 +168,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="new_cust">Keterangan</label>
+                            <label for="new_cust">Keterangan <small>Optional</small> </label>
                             <textarea name="keterangan" id="keterangan" class="form-control @error('keterangan') is-invalid @enderror" cols="30" rows="5">{{ old('keterangan') }}</textarea>
                             @error('keterangan')
                                 <div class="invalid-feedback">
@@ -231,7 +234,7 @@
             sisa 	= number_string.length % 3,
             rupiah 	= number_string.substr(0, sisa),
             ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
-            
+
             if (ribuan) {
                 separator = sisa ? '.' : '';
                 rupiah += separator + ribuan.join('.');
