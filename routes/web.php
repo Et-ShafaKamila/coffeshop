@@ -44,13 +44,18 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('rekapitulasi', [RekapitulasiController::class, 'index'])->name('rekapitulasi.index');
         });
 
-        Route::get('lupa-password', [UserController::class, 'index'])->name('lupa-password.index');
-        Route::put('lupa-password', [UserController::class, 'changePassword'])->name('lupa-password.change');
+        // Route::get('lupa-password', [UserController::class, 'index'])->name('lupa-password.index');
+        // Route::put('lupa-password', [UserController::class, 'changePassword'])->name('lupa-password.change');
 
-        Route::get('cek_kualitas', [CekKualitasController::class, 'index'])->name('cek_kualitas.index');
-
-        
+        Route::get('cek-kualitas', [CekKualitasController::class, 'index'])->name('cek-kualitas.index');
+        Route::get('cek-kualitas/create', [CekKualitasController::class, 'create'])->name('cek-kualitas.create');
+        Route::post('cek-kualitas', [CekKualitasController::class, 'store'])->name('cek-kualitas.store');
+        Route::delete('cek-kualitas/{id}', [CekKualitasController::class, 'destroy'])->name('cek-kualitas.destroy');
     });
 });
+
+Route::get('lupa-password', [UserController::class, 'index'])->name('lupa-password.index');
+Route::put('lupa-password', [UserController::class, 'changePassword'])->name('lupa-password.change');
+
 
 require __DIR__.'/auth.php';
