@@ -41,6 +41,7 @@
                                   $index = 0;
                                   $initTotal = 0;
                                   $isFirstLoad = true;
+                                  $endIndexDetail = count($detail) - 1;
                                 @endphp
                                 @forelse ($daftarMenu as $item)
                                 <tbody>
@@ -56,7 +57,6 @@
                                             @if ($item->id == $detail[$index]->id_menu)
                                             @php
                                                 $initTotal += $detail[$index]->total_harga;
-                                                // echo $item->id.'-'.$detail[$index]->id_menu;
                                             @endphp
                                             <input type="text" value="{{ $detail[$index]->qty }}" name="qty[]" class="qty form-control" >
                                             @else
@@ -73,6 +73,7 @@
                                     </tr>
                                     @php
                                         if ($item->id == $detail[$index]->id_menu)
+                                            if($index < $endIndexDetail)
                                             $index++;
                                         //if($loop->iteration < count($detail)) {
                                         //    if ($item->id == $detail[$index]->id_menu)

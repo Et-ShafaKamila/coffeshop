@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
             return view('dashboard');
         })->name('dashboard');
 
+        Route::resource('user', UserController::class);
         Route::resource('daftar-menu', DaftarMenuController::class);
         Route::resource('pemesanan', PesananController::class);
         Route::get('pemesanan/konfirmasi-pembayaran/{id}', [PesananController::class, 'konfirmasiPembayaran'])
@@ -54,7 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-Route::get('lupa-password', [UserController::class, 'index'])->name('lupa-password.index');
+Route::get('lupa-password', [UserController::class, 'indexPassword'])->name('lupa-password.index');
 Route::put('lupa-password', [UserController::class, 'changePassword'])->name('lupa-password.change');
 
 

@@ -18,6 +18,12 @@
                 Daftar Meja
               </a>   --}}
               @endif
+              @if (auth()->user()->role != 'Owner' || auth()->user()->role != 'Pegawai')
+              <a class="nav-link {{ Request::segment(2) == 'user' ? 'active' : '' }}" href="{{ route('user.index') }}">
+                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                Akun
+              </a>
+              @endif
               @if (auth()->user()->role != 'Owner')
               <a class="nav-link {{ Request::segment(2) == 'pemesanan' ? 'active' : '' }}" href="{{ route('pemesanan.index') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

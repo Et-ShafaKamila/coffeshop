@@ -216,7 +216,7 @@ class PesananController extends Controller
                                                 ->join('daftar_menu', 'daftar_menu.id', 'detail_pesanan.id_menu')
                                                 ->where('detail_pesanan.kode_pesanan', $pesanan->kode_pesanan)
                                                 ->orderBy('daftar_menu.nama')->get();
-
+                                                
         $this->params['daftarMenu'] = DaftarMenu::orderBy('nama')->get();
 
         $this->params['customer'] = User::where('role', 'Customer')

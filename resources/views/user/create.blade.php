@@ -1,12 +1,15 @@
 @extends('layouts.template')
 @section('content')
-            <h1 class="mt-4">Lupa Password</h1>
+            <h1 class="mt-4">Tambah Akun</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">
                     <a href="{{ route('dashboard') }}">Home</a>
                 </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('user.index') }}">Akun</a>
+                </li>
                 <li class="breadcrumb-item active">
-                    Lupa Password
+                    Tambah
                 </li>
             </ol>
             <div class="row">
@@ -14,44 +17,48 @@
                 <div class="col-xl-12 col-lg-11">
                     <div class="card shadow mb-4">
                       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Lupa Password</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Tambah Akun</h6>
                       </div>
                       <!-- Card Body -->
                       <div class="card-body">
-                        <form action="{{ route('lupa-password.change') }}" method="post">
+                        <form action="{{ route('user.store') }}" method="post">
                             @csrf
-                            @method('put')
+                            <div class="form-group">
+                                <label for="nama">Nama</label>
+                                <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}" required>
+                                @error('nama')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
+                                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
                                 @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            {{--  <div class="form-group">
-                                <label for="old_password">Password lama</label>
-                                <input type="password" name="old_password" id="old_password" class="form-control @error('old_password') is-invalid @enderror">
-                                @error('old_password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>  --}}
                             <div class="form-group">
-                                <label for="new_password">Password baru</label>
-                                <input type="password" name="new_password" id="new_password" class="form-control @error('new_password') is-invalid @enderror">
-                                @error('new_password')
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required>
+                                @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="conf_password">Konfirmasi password baru</label>
-                                <input type="password" name="conf_password" id="conf_password" class="form-control @error('conf_password') is-invalid @enderror">
-                                @error('conf_password')
+                                <label for="role">Role</label>
+                                <select name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
+                                    <option value="0">Pilih role</option>
+                                    <option value="Customer" {{ old('role') == 'Customer' ? 'selected' : '' }}>Customer</option>
+                                    <option value="Owner" {{ old('role') == 'Owner' ? 'selected' : '' }}>Owner</option>
+                                    <option value="Pegawai" {{ old('role') == 'Pegawai' ? 'selected' : '' }}>Pegawai</option>
+                                </select>
+                                @error('role')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
