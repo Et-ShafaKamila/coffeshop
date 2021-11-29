@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('user', UserController::class);
         Route::resource('daftar-menu', DaftarMenuController::class);
         Route::resource('pemesanan', PesananController::class);
-        Route::get('pemesanan/konfirmasi-pembayaran/{id}', [PesananController::class, 'konfirmasiPembayaran'])
+        Route::get('pemesanan/konfirmasi-pemesanan/{id}', [PesananController::class, 'konfirmasiPemesanan'])
             ->name('pemesanan.konfirmasi');
         Route::get('pemesanan/cancel/{id}', [PesananController::class, 'cancelOrder'])
             ->name('pemesanan.cancel');
