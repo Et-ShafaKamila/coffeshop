@@ -366,7 +366,7 @@ class PesananController extends Controller
         return back()->withStatus('Berhasil menghapus data.');
     }
 
-    public function konfirmasiPembayaran($id)
+    public function konfirmasiPemesanan($id)
     {
         $update = Pesanan::find($id);
         $update->status = 'Sudah Diproses';
