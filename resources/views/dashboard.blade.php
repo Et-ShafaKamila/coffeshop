@@ -44,14 +44,45 @@
     <center>
       <!-- <img src="{{ asset('assets/img/logo.jpeg') }}" class="img-fluid rounded-circle my-4">s -->
       <p style="text-align: justify;">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et turpis sit amet tellus lacinia tincidunt quis ac dui. Nulla pulvinar convallis ex, nec fermentum nisi rhoncus sit amet. Praesent eu tellus sem. Integer sollicitudin, ligula ut luctus convallis, purus orci pulvinar dolor, sit amet venenatis nisl magna id augue. Proin venenatis porttitor nibh, eu semper sapien interdum et. Praesent et nibh in purus dictum maximus. Proin et tellus sed nulla pulvinar sollicitudin. Donec et purus ultricies, posuere ipsum ut, auctor magna.
-
-        Etiam lectus nulla, varius sit amet scelerisque nec, elementum pulvinar erat. Morbi consequat, nulla sed bibendum consectetur, dolor lorem efficitur risus, in consequat ipsum magna quis tellus. In hac habitasse platea dictumst. Nullam tristique facilisis odio, ac imperdiet sapien semper eget. Fusce et mattis erat. Maecenas tincidunt sem lacus, sed accumsan felis fringilla sed. Nulla placerat ac leo at laoreet.
+        Awal tahun 2017 dengan latar belakang yang dimiliki oleh Benediktus Distivianto Yoci setelah beberapa waktu bekerja di berbagai perusahaan mendirikan usaha produksi kopi mengingat perkembangan masa depan yang sulit dalam ketersediaan lapangan kerja dan situasi ekonomi global menjadi pemikiran
+        untuk segera membangun usaha mandiri yang kedepan dapat menjadi ladang penghasilan bagi keluarga dan memberikan peluang lapangan kerja bagi masyarakat khususnya di Bondowoso dan Kabupaten Bondowoso dinilai memiliki potensi sumber daya alam cukup besar dengan dukungan pemerintah daerah
+        kabupaten Bondowoso yang menyatakan dalam slogan Bondowoso Republik Kopi. Dengan pengalaman sebagai top manajemen di group perusahaaan yang bergerak dalam bidang perkebunan kopi, kakao, karet dan ekspor tembakau jenis Na Ogst menjadikan motivasi untuk mendirikan usaha mandiri khususnya 
+        yang bergerak dalam produksi kopi. Pada tahun 2018 Becoff Coffee Indonesia menjadi usaha yang secara resmi dibangun dengan memproduksi berbagai produk hilir kopi dari biji kopi Arabika dan Robusta.
       </p>
     </center>
   </div>
   <div class="col-xl-2"></div>
 </div>
+
+
+<div class="row mt-4">
+  <div class="col-xl-4"></div>
+  <div class="col-xl-4">
+    <center><h4>VISI</h4>
+    <p style="text-align: center;">
+        Menjadi usaha mandiri yang dapat memenuhi<br>
+        kebutuhan dengan produk bermutu, berkualitas<br>
+        dan menjadi pilihan konsumen<br>
+
+      </p>
+    </center>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-xl-4"></div>
+  <div class="col-xl-4">
+    <center><h4>MISI</h4>
+    <p style="text-align: center;">
+        Menjadi perusahaan industri yang dapat<br>
+        membawa nama Bondowoso di bidang industri<br>
+        kopi nasional
+
+      </p>
+    </center>
+  </div>
+</div>
+
 <div class="row mt-4">
   <div class="col-xl-4"></div>
   <div class="col-xl-4">

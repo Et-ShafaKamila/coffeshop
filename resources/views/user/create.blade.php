@@ -50,20 +50,6 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label for="role">Role</label>
-                                <select name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
-                                    <option value="0">Pilih role</option>
-                                    <option value="Customer" {{ old('role') == 'Customer' ? 'selected' : '' }}>Customer</option>
-                                    <option value="Owner" {{ old('role') == 'Owner' ? 'selected' : '' }}>Owner</option>
-                                    <option value="Pegawai" {{ old('role') == 'Pegawai' ? 'selected' : '' }}>Pegawai</option>
-                                </select>
-                                @error('role')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
                             <input type="submit" value="Submit" class="btn btn-success">
                             <input type="reset" value="Reset" class="btn btn-danger">
                         </form>

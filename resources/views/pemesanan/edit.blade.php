@@ -21,7 +21,7 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-            <form action="{{ route('pemesanan.update', $pesanan->id) }}" method="post">
+            <form action="{{ route('pemesanan.update', $pesanan->id) }}" method="post" onreset="total()">
                 @csrf
                 @method('PUT')
                 <div class="row">

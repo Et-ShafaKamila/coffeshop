@@ -54,6 +54,7 @@ class CekKualitasController extends Controller
                             $musty) / 13);
 
         $newCekKualitas = new CekKualitas;
+        $newCekKualitas->id_user = auth()->user()->id;
         $newCekKualitas->nomor_identitas = $request->nomor_identitas;
         $newCekKualitas->jenis_kopi = $request->jenis_kopi;
         $newCekKualitas->aroma = $aroma;

@@ -72,7 +72,7 @@
                                         <form action="{{route('cek-kualitas.destroy', $item->id)}}" method="POST" class="d-inline">
                                             @method('delete')
                                             @csrf
-                                            <button type="submit" class="btn btn-sm btn-danger btn-circle" onclick="return confirm('Hapus Data ?')">
+                                            <button type="submit" class="btn btn-sm btn-danger btn-circle" onclick="return confirm('Yakin Ingin Menghapus Data ?')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>

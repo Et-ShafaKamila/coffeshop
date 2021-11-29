@@ -9,7 +9,7 @@
     <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ auth()->user()->name }}<i class="ml-2 fas fa-user fa-fw"></i></a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-               <a class="dropdown-item" href="{{ route('lupa-password.index') }}">Lupa Password</a> 
+               {{-- <a class="dropdown-item" href="{{ route('lupa-password.index') }}">Lupa Password</a>  --}}
               <form action="{{ route('logout') }}" method="post">
                   @csrf
                   <button class="dropdown-item" type="submit">Logout</button>

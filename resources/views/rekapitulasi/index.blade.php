@@ -77,14 +77,14 @@
                                             <td class="text-center">{{ $item->keterangan }}</td>
                                             <td class="text-center">
                                                 @if($item->tipe == 'Pemasukan')
-                                                    Rp. {{ number_format($item->nominal, 2, ',', '.') }}
+                                                    Rp. {{ number_format($item->nominal, 0, '.', '.') }}
                                                 @else
                                                 -
                                                 @endif
                                             </td>
                                             <td class="text-center">
                                                 @if($item->tipe == 'Pengeluaran')
-                                                    Rp. {{ number_format($item->nominal, 2, ',', '.') }}
+                                                    Rp. {{ number_format($item->nominal, 0, '.', '.') }}
                                                 @else
                                                 -
                                                 @endif
@@ -103,12 +103,12 @@
                                     <tfoot>
                                         <tr>
                                           <th class="text-center" colspan="3">Total</th>
-                                          <th class="text-center">Rp. {{ number_format($totalPemasukan, 2, ',', '.') }}</th>
-                                          <th class="text-center">Rp. {{ number_format($totalPengeluaran, 2, ',', '.') }}</th>
+                                          <th class="text-center">Rp. {{ number_format($totalPemasukan, 0, '.', '.') }}</th>
+                                          <th class="text-center">Rp. {{ number_format($totalPengeluaran, 0, '.', '.') }}</th>
                                         </tr>
                                         <tr>
-                                          <th class="text-center" colspan="3">Laba rugi</th>
-                                          <th class="text-center" colspan="2">Rp. {{ number_format($totalPemasukan-$totalPengeluaran, 2, ',', '.') }}</th>
+                                          <th class="text-center" colspan="3">Laba/Rugi</th>
+                                          <th class="text-center" colspan="2">Rp. {{ number_format($totalPemasukan-$totalPengeluaran, 0, '.', '.') }}</th>
                                         </tr>
                                     </tfoot>
                                 </table>

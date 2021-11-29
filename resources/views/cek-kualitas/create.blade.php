@@ -35,7 +35,7 @@
                 <p>7-8 (Tinggi)</p>
                 <p>9-10 (Sangat Tinggi)</p>
                 
-                <!--- Aroma ---!>
+                {{-- Aroma --}}
                 <h6 class="mt-5">Fragrance / Aroma</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -111,9 +111,9 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Aroma ---!>
+               {{--  End Aroma --}}
 
-                <!--- Flavor / Rasa ---!>
+                {{-- Flavor / Rasa --}}
                 <h6 class="mt-5">Flavor / Rasa</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -189,9 +189,9 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Flavor / Rasa ---!>
+                {{-- End Flavor / Rasa --}}
 
-                <!--- After Taste ---!>
+               {{--  After Taste --}}
                 <h6 class="mt-5">After Taste</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -267,10 +267,9 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End After Taste ---!>
+               {{-- End After Taste  --}}
 
-
-                <!--- Acidity ---!>
+               {{-- Acidity --}}
                 <h6 class="mt-5">Acidity</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -346,10 +345,10 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Acidity ---!>
+                {{-- End Acidity --}}
 
                     
-                <!--- Body / Kekentalan ---!>
+               {{-- Body / Kekentalan --}}
                 <h6 class="mt-5">Body / Kekentalan</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -425,10 +424,10 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Body / Kekentalan ---!>
+                {{-- End Body / Kekentalan --}}
 
                     
-                <!--- Bitterness / Kepahitan ---!>
+                {{-- Bitterness / Kepahitan  --}}
                 <h6 class="mt-5">Bitterness / Kepahitan</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -504,7 +503,7 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Bitterness / Kepahitan ---!>
+                {{-- End Bitterness / Kepahitan --}}
 
                 <div class="row">
                     <div class="col">
@@ -512,7 +511,7 @@
                     </div>
                 </div>
 
-                <!--- Fruty / Winey ---!>
+               {{--  Fruty / Winey --}}
                 <h6 class="mt-5">Fruty / Winey</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -588,10 +587,10 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Fruty / Winey ---!>
+                {{-- End Fruty / Winey --}}
 
                     
-                <!--- Green / Grassy ---!>
+                {{-- Green / Grassy --}}
                 <h6 class="mt-5">Green / Grassy</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -667,10 +666,10 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Green / Grassy ---!>
+                {{-- End Green / Grassy --}}
 
                     
-                <!--- Smokey ---!>
+                {{-- Smokey --}} 
                 <h6 class="mt-5">Smokey</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -746,10 +745,10 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Smokey ---!>
+                {{-- End Smokey --}}
 
                     
-                <!--- Cereal ---!>
+                {{-- Cereal --}}
                 <h6 class="mt-5">Cereal</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -825,10 +824,10 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Cereal ---!>
+               {{--  End Cereal --}}
 
                     
-                <!--- Chemical / Medicine ---!>
+                {{-- Chemical / Medicine  --}}
                 <h6 class="mt-5">Chemical / Medicine</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -904,10 +903,10 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Chemical / Medicine ---!>
+                {{-- End Chemical / Medicine --}}
 
                     
-                <!--- Stinkey ---!>
+                {{-- Stinkey --}}
                 <h6 class="mt-5">Stinkey</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -983,10 +982,10 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Stinkey ---!>
+                {{-- End Stinkey  --}}
 
                     
-                <!--- Earthy / Mouldy / Musty ---!>
+                {{-- Earthy / Mouldy / Musty --}}
                 <h6 class="mt-5">Earthy / Mouldy / Musty</h6>
                 <div class="row">
                     <div class="col"></div>
@@ -1062,7 +1061,7 @@
                     </div>
                     <div class="col">Sangat Tinggi</div>
                 </div>
-                <!--- End Earthy / Mouldy / Musty ---!>
+                {{-- End Earthy / Mouldy / Musty --}}
 
                 <button type="submit" class="btn btn-success mt-2">Kirim</button>
 

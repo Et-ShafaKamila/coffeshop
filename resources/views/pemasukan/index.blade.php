@@ -39,7 +39,7 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center">{{ substr($item->created_at, 0, 10) }}</td>
                                             <td class="text-center">{{ $item->keterangan }}</td>
-                                            <td class="text-center">Rp. {{ number_format($item->nominal, 2, ',', '.') }}</td>
+                                            <td class="text-center">Rp. {{ number_format($item->nominal, 0, '.', '.') }}</td>
                                         </tr>
                                         @php
                                             $total += $item->nominal;
@@ -49,7 +49,7 @@
                                     <tfoot>
                                         <tr>
                                           <th class="text-center" colspan="3">Total</th>
-                                          <th class="text-center">Rp. {{ number_format($total, 2, ',', '.') }}</th>
+                                          <th class="text-center">Rp. {{ number_format($total, 0, '.', '.') }}</th>
                                         </tr>
                                     </tfoot>
                                 </table>

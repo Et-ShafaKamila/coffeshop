@@ -57,7 +57,7 @@
                                         <br>
                                         {{ $item->nama }}
                                         <br>
-                                        Rp. <label>{{ number_format($item->harga, 2, ',', '.') }}</label>
+                                        Rp. <label>{{ number_format($item->harga, 0, '.', '.') }}</label>
                                     </td>
                                     <td class="text-center">
                                         <center>
@@ -65,7 +65,7 @@
                                         </center>
                                     </td>
                                     <td class="text-center">
-                                        Rp. {{ number_format($item->total_harga, 2, ',', '.') }}
+                                        Rp. {{ number_format($item->total_harga, 0, '.', '.') }}
                                     </td>
                                 </tr>
                                 @empty
@@ -73,7 +73,7 @@
                                 @endforelse
                             <tr>
                                 <th class="text-center" colspan="2">Total</th>
-                                <th class="text-center">Rp. {{ number_format($pesanan->total, 2, ',', '.') }}</th>
+                                <th class="text-center">Rp. {{ number_format($pesanan->total, 0, '.', '.') }}</th>
                             </tr>
                             </table>
                         </div>

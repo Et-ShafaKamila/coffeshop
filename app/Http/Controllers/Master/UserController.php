@@ -11,8 +11,11 @@ class UserController extends Controller
     /* Fitur Manajemen User */
     public function index()
     {
-        $user = User::orderBy('name')->get();
-
+        if(auth()->user()->role == 'Owner')
+            $user = User::where('role', 'Owner')->orWhere('role', 'Pegawai')->orderBy('name')->get();
+        if(auth()->user()->role == 'Pegawai' || auth()->user()->role == 'Customer')
+            $user = User::where('id', auth()->user()->id)->orderBy('name')->get();
+        
         $data = array(
             'data' => $user
         );
@@ -31,23 +34,20 @@ class UserController extends Controller
             'nama' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required',
-            'role' => 'not_in:0',
         ], [
             'requried' => ':attribute harus diisi.',
             'unique' => ':attribute telah digunakan.',
-            'not_in' => ':attribute harus dipilih.'
         ], [
             'nama' => 'Nama',
             'email' => 'Email',
             'password' => 'Password',
-            'role' => 'Role'
         ]);
 
         User::create([
             'name' => $request->nama,
             'email' => $request->email,
             'password' => \Hash::make($request->password),
-            'role' => $request->role,
+            'role' => 'Pegawai',
         ]);
 
         return redirect('/master/user')->withStatus('Berhasil menambahkan data.');
@@ -73,22 +73,24 @@ class UserController extends Controller
             'nama' => 'required',
             'email' => 'required'.$isEmailUnique,
             'password' => 'required',
-            'role' => 'not_in:0',
         ], [
             'requried' => ':attribute harus diisi.',
             'unique' => ':attribute telah digunakan.',
-            'not_in' => ':attribute harus dipilih.'
         ], [
             'nama' => 'Nama',
             'email' => 'Email',
             'password' => 'Password',
-            'role' => 'Role'
         ]);
 
         $user->name = $request->nama;
         $user->email = $request->email;
         $user->password = \Hash::make($request->password);
-        $user->role = $request->role;
+        if(auth()->user()->role == 'Owner' && $user->role == 'Owner')
+            $user->role =  'Owner';
+        if(auth()->user()->role == 'Owner' && $user->role == 'Pegawai')
+            $user->role =  'Pegawai';
+        if(auth()->user()->role == 'Customer' && $user->role == 'Customer')
+            $user->role =  'Customer';
 
         $user->save();
 

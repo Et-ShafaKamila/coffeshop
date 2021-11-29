@@ -21,7 +21,7 @@
               @if (auth()->user()->role != 'Owner' || auth()->user()->role != 'Pegawai')
               <a class="nav-link {{ Request::segment(2) == 'user' ? 'active' : '' }}" href="{{ route('user.index') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                Akun
+                Profil
               </a>
               @endif
               @if (auth()->user()->role != 'Owner')

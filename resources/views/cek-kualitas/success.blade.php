@@ -22,7 +22,25 @@
             <div class="card-body">
                 <p>Selamat telah berhasil melakukan cek kualitas.</p>
                 <p>Jenis Kopi : {{ $jenis_kopi }}</p>
-                <p>Score : {{ $score }}</p>
+                <p>
+                    Score : {{ $score }}
+                    @php
+                        if($score == 0)
+                            echo "Tidak layak minum";
+                        else if($score > 0 && $score <= 2)
+                            echo "Sangat Buruk";
+                        else if($score > 2 && $score <= 4)
+                            echo "Buruk";
+                        else if($score > 4 && $score <= 6)
+                            echo "Baik";
+                        else if($score > 6 && $score <= 8)
+                            echo "Sangat Baik";
+                        else if($score > 8 && $score <= 10)
+                            echo "Ekselent";
+                        else 
+                            echo "Tidak diketahui";
+                    @endphp
+                </p>
                 <a href="{{ route('cek-kualitas.index') }}" class="btn btn-info">Lihat Semua Data</a>
             </div>
         </div>

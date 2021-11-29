@@ -25,7 +25,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="nominal">Nominal</label>
-                                <input type="number" name="nominal" id="nominal" class="form-control @error('nominal') is-invalid @enderror" value="{{ old('nominal') }}" required>
+                                <input type="number" min="0" name="nominal" id="nominal" class="form-control @error('nominal') is-invalid @enderror" value="{{ old('nominal') }}" required>
                                 @error('nominal')
                                     <div class="invalid-feedback">
                                         {{ $message }}

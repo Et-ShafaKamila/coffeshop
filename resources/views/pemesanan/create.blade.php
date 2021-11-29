@@ -160,7 +160,7 @@
                         @endif  --}}
                         <div class="form-group">
                             <label for="meja">Nomor Meja <small class="text-danger">*</small> </label>
-                            <input type="number" name="meja" id="meja" class="form-control @error('meja') is-invalid @enderror" value="{{ old('meja') }}">
+                            <input type="number" min ="0" name="meja" id="meja" class="form-control @error('meja') is-invalid @enderror" value="{{ old('meja') }}">
                             @error('meja')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -242,10 +242,10 @@
             sum+=amount;
             var totalBiaya = sum;
 
-            // console.log(totalBiaya);
+            
             $(this).find('.amount').text(''+rupiah);
         });
-        sum = number_format(sum, 2, ',', '.');
+        sum = number_format(sum, 0, '.','.');
         $('.total').text(sum);
     }
 </script>

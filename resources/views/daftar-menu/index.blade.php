@@ -28,6 +28,7 @@
                                     <thead>
                                         <tr>
                                           <th class="text-center">#</th>
+                                          <th class="text-center">Gambar</th>
                                           <th class="text-center">Nama</th>
                                           <th class="text-center">Keterangan</th>
                                           <th class="text-center">Harga</th>
@@ -39,11 +40,12 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center">
-                                                <img src="{{ asset($item->foto) }}" alt="{{$item->nama}}" class="rounded img-fluid" width="200px" height="200px">
-                                                {{ $item->nama }}
+                                                <img src="{{ asset($item->foto) }}" class="rounded img-fluid" width="100px" height="100px">
+                                            </td>
+                                            <td class="text-center">{{ isset($item->nama) ? $item->nama : '-' }}
                                             </td>
                                             <td class="text-center">{{ isset($item->keterangan) ? $item->keterangan : '-' }}</td>
-                                            <td class="text-right">Rp. {{ number_format($item->harga, 2, ',', '.') }}</td>
+                                            <td class="text-right">Rp. {{ number_format($item->harga, 0, '.', '.') }}</td>
                                             <td class="align-middle">
                                                 <center>
                                                     <a href="{{route('daftar-menu.edit', $item->id)}}">
@@ -54,7 +56,7 @@
                                                     <form action="{{route('daftar-menu.destroy', $item->id)}}" method="POST" class="d-inline">
                                                         @method('delete')
                                                         @csrf
-                                                        <button type="submit" class="btn btn-sm btn-danger btn-circle" onclick="return confirm('Hapus Data ?')">
+                                                        <button type="submit" class="btn btn-sm btn-danger btn-circle" onclick="return confirm('Yakin Ingin Hapus Data ?')">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>

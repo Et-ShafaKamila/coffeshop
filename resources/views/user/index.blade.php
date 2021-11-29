@@ -3,13 +3,13 @@
 <link href="{{ asset('assets/vendor/datatables/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" crossorigin="anonymous" />
 @endpush
 @section('content')
-            <h1 class="mt-4">Akun</h1>
+            <h1 class="mt-4">Profil</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">
                     <a href="{{ route('dashboard') }}">Home</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    Akun
+                    Profil
                 </li>
             </ol>
             <div class="row">
@@ -17,12 +17,13 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-chart-area mr-1"></i>
-                            List Akun
+                            List Profil
                             @if (auth()->user()->role == 'Owner')
                             <a href="{{ route('user.create') }}" class="ml-4 d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                 <i class="fas fa-plus fa-sm text-white-50"></i> Tambah
                             </a>
                             @endif
+                            
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -54,9 +55,21 @@
                                                         </button>
                                                     </form>
                                                     &nbsp;
+                                                    {{-- @if(auth()->user()->role =='Customer')
                                                     <a href="{{route('user.edit', $item->id)}}">
                                                         <button type="submit" class="btn btn-sm btn-info btn-circle">
-                                                            <i class="fas fa-pen"></i>
+                                                        <i class="fas fa-pen"></i>
+                                                        </button>
+                                                    </a> --}}
+                                                    <a href="{{route('user.edit', $item->id)}}">
+                                                        <button type="submit" class="btn btn-sm btn-info btn-circle">
+                                                        <i class="fas fa-pen"></i>
+                                                        </button>
+                                                    </a>
+                                                    @elseif (auth()->user()->role == 'Customer')
+                                                    <a href="{{route('user.edit', $item->id)}}">
+                                                        <button type="submit" class="btn btn-sm btn-info btn-circle">
+                                                        <i class="fas fa-pen"></i>
                                                         </button>
                                                     </a>
                                                     @else

@@ -47,7 +47,7 @@
                                             <td class="text-center">
                                                 <img src="{{ asset($item->bukti) }}" width="200" height="200">
                                             </td>
-                                            <td class="text-center">Rp. {{ number_format($item->nominal, 2, ',', '.') }}</td>
+                                            <td class="text-center">Rp. {{ number_format($item->nominal, 0, '.', '.') }}</td>
                                             <td class="align-middle">
                                                 <center>
                                                     <a href="{{route('pengeluaran.edit', $item->id)}}">
@@ -66,7 +66,7 @@
                                     <tfoot>
                                         <tr>
                                           <th class="text-center" colspan="4">Total</th>
-                                          <th class="text-center">Rp. {{ number_format($total, 2, ',', '.') }}</th>
+                                          <th class="text-center">Rp. {{ number_format($total, 0, '.', '.') }}</th>
                                           <th></th>
                                         </tr>
                                     </tfoot>
