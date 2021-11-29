@@ -90,14 +90,14 @@
                                             </button>
                                         </form>
                                         @endif
-                                        {{-- @if ($item->status == 'Sudah Diproses' && !isset($item->cancelled_at) && auth()->user()->role == 'Pegawai')
-                                        form action="{{route('pemesanan.print', $item->id)}}" method="get" target="_blank" class="d-inline">
-                                            @csr<f
+                                        @if ($item->status == 'Sudah Diproses' && !isset($item->cancelled_at) && auth()->user()->role == 'Pegawai')
+                                        <form action="{{route('pemesanan.print', $item->id)}}" method="get" target="_blank" class="d-inline">
+                                            @csrf
                                             <button type="submit" class="btn btn-sm btn-primary btn-circle" onclick="return confirm('Apakah Anda Ingin Mencetak Nota?')">
                                                 <i class="fas fa-print"></i>
                                             </button>
                                         </form>
-                                        @endif --}}
+                                        @endif
                                         {{--  <form action="{{route('pemesanan.destroy', $item->id)}}" method="POST" class="d-inline">
                                             @method('delete')
                                             @csrf
