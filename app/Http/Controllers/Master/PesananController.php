@@ -365,7 +365,7 @@ class PesananController extends Controller
 
         return back()->withStatus('Berhasil menghapus data.');
     }
-    
+
     public function konfirmasiPembayaran($id)
     {
         $update = Pesanan::find($id);
@@ -383,7 +383,7 @@ class PesananController extends Controller
             return back()->withStatus('Berhasil mengkonfirmasi pemesanan.');
         }
 
-        return back()->withError('Gagal mengkonfirmasi pembayaran.');
+        return back()->withError('Gagal mengkonfirmasi pemesanan.');
 
     }
 
